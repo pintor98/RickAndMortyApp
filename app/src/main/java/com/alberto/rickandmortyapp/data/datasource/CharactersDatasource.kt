@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CharactersDatasource {
     fun getCharacters(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<CharacterResponse>>
+    fun getCharacterById(id: Int): Flow<CharacterResponse>
 
     fun getDefaultPageConfig(): PagingConfig {
         return PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = true)

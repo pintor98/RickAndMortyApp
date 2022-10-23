@@ -26,4 +26,8 @@ class CharactersDatasourceImpl @Inject constructor(
             remoteMediator = CharactersMediator(apiCharacters, appDatabase)
         ).flow
     }
+
+    override fun getCharacterById(id: Int): Flow<CharacterResponse> {
+        return appDatabase.getCharacterModelDao().getCharacterById(id)
+    }
 }
