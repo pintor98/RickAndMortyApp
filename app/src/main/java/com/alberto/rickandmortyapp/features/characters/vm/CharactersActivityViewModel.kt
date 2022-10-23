@@ -29,7 +29,9 @@ class CharactersActivityViewModel @Inject constructor(
     fun getAllCharacters() {
         viewModelScope.launch {
             getCharactersUseCase.execute(null)
-                .catch { error -> _error.value = error as CustomException }
+                .catch {
+                        error -> _error.value = error as CustomException
+                }
                 .distinctUntilChanged()
                 .cachedIn(viewModelScope)
                 .collectLatest { data -> _characters.value = data }

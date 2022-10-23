@@ -1,5 +1,6 @@
 package com.alberto.rickandmortyapp.features.characters.activity
 
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -36,6 +37,10 @@ class CharactersActivity : BaseActivityBinding<CharactersActivityViewModel>() {
                 adapter.submitData(characters)
             }
         }
+    }
+
+    override fun showError(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {

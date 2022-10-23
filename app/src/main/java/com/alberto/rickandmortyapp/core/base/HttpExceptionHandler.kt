@@ -2,10 +2,11 @@ package com.alberto.rickandmortyapp.core.base
 
 import com.alberto.rickandmortyapp.domain.model.common.*
 import retrofit2.HttpException
+import java.net.UnknownHostException
 
 fun toDomainException(exception: Throwable): CustomException {
     return try {
-        if (exception is NoConnectionIOException || exception is ResponseError.NoConnectivityException) {
+        if (exception is NoConnectionIOException || exception is ResponseError.NoConnectivityException || exception is UnknownHostException) {
             ResponseError.NoConnectivityException()
         } else {
             when ((exception as HttpException).code()) {
