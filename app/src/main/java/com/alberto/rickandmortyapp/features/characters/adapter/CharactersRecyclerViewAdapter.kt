@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alberto.rickandmortyapp.R
 import com.alberto.rickandmortyapp.domain.model.CharacterModel
+import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 
 class CharactersRecyclerViewAdapter: PagingDataAdapter<CharacterModel, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
@@ -29,6 +31,11 @@ class CharactersRecyclerViewAdapter: PagingDataAdapter<CharacterModel, RecyclerV
 
         if (character != null) {
             charactersViewHolder.name.text = character.name
+
+            Glide
+                .with(charactersViewHolder.itemView)
+                .load(character.image)
+                .into(charactersViewHolder.image)
         }
     }
 
@@ -36,5 +43,6 @@ class CharactersRecyclerViewAdapter: PagingDataAdapter<CharacterModel, RecyclerV
 
     class CharactersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: MaterialTextView = itemView.findViewById(R.id.character_item_view_name)
+        val image: ShapeableImageView = itemView.findViewById(R.id.character_item_view_image)
     }
 }

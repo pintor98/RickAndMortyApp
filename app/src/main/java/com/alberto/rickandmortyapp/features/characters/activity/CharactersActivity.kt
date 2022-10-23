@@ -1,6 +1,5 @@
 package com.alberto.rickandmortyapp.features.characters.activity
 
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
