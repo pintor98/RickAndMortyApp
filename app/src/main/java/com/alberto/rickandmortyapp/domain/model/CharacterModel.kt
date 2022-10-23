@@ -1,5 +1,9 @@
 package com.alberto.rickandmortyapp.domain.model
 
+data class CharactersModel (
+    val results: List<CharacterModel>
+)
+
 data class CharacterModel(
     val id: Int,
     val name: String,

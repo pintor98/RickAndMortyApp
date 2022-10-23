@@ -1,8 +1,15 @@
 package com.alberto.rickandmortyapp.data.datasource
 
-import com.alberto.rickandmortyapp.data.response.CharactersResponse
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.alberto.rickandmortyapp.core.base.Constants.DEFAULT_PAGE_SIZE
+import com.alberto.rickandmortyapp.data.response.CharacterResponse
 import kotlinx.coroutines.flow.Flow
 
 interface CharactersDatasource {
-    fun getCharacters(): Flow<CharactersResponse>
+    fun getCharacters(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<CharacterResponse>>
+
+    fun getDefaultPageConfig(): PagingConfig {
+        return PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = true)
+    }
 }
