@@ -1,5 +1,7 @@
 package com.alberto.rickandmortyapp.domain.model.common
 
+import java.io.IOException
+
 sealed class CustomException(open val code: Int?, message: String): Throwable(message), ResponseError,
     RequestError, AuthError
 
@@ -55,4 +57,9 @@ sealed interface AuthError {
         override val message: String = "necesitamos autentificación",
         override val code: Int = 401
     ): CustomException(code, message)
+}
+
+class NoConnectionIOException: IOException() {
+    override val message: String
+        get() = "No network available, please check your WiFi or Data connection"
 }
