@@ -12,7 +12,13 @@ import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 
-class CharactersRecyclerViewAdapter: PagingDataAdapter<CharacterModel, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+class CharactersRecyclerViewAdapter(
+    private val listener: OnItemClickListener,
+): PagingDataAdapter<CharacterModel, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+
+    interface OnItemClickListener {
+        fun onItemClick(id: Int)
+    }
 
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<CharacterModel>() {
@@ -36,6 +42,8 @@ class CharactersRecyclerViewAdapter: PagingDataAdapter<CharacterModel, RecyclerV
                 .with(charactersViewHolder.itemView)
                 .load(character.image)
                 .into(charactersViewHolder.image)
+
+            charactersViewHolder.bind(character.id, listener)
         }
     }
 
@@ -44,5 +52,9 @@ class CharactersRecyclerViewAdapter: PagingDataAdapter<CharacterModel, RecyclerV
     class CharactersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: MaterialTextView = itemView.findViewById(R.id.character_item_view_name)
         val image: ShapeableImageView = itemView.findViewById(R.id.character_item_view_image)
+
+        fun bind(id: Int, listener: OnItemClickListener) {
+            itemView.setOnClickListener { listener.onItemClick(id) }
+        }
     }
 }
